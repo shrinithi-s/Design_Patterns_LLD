@@ -1,0 +1,14 @@
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Compiled output
+out/
+*.class
+
+# Build files
+target/
+build/
