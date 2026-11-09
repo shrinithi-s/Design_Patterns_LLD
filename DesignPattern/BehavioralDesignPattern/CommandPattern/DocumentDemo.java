@@ -1,8 +1,22 @@
-package DesignPattern.CommandPattern;
+package DesignPattern.BehavioralDesignPattern.CommandPattern;
 
 import java.util.List;
 import java.util.ArrayList;
 
+class MenuOption{ //Invoker
+
+    List<Commands> commandsList=new ArrayList<>();
+
+    public void addCommands(Commands command){
+        commandsList.add(command);
+    }
+
+    public void executeCommands(){
+        for(Commands command:commandsList){
+            command.execute();
+        }
+    }
+}
 
 interface Commands{ //command
     void execute();
@@ -62,29 +76,16 @@ class Document{ //reciever - we can even extend this like keeping interface
 //     void close();
 // }
 
-class MenuOption{ //Invoker
-
-    List<Commands> commandsList=new ArrayList<>();
-
-    public void addCommands(Commands command){
-        commandsList.add(command);
-    }
-
-    public void executeCommands(){
-        for(Commands command:commandsList){
-            command.execute();
-        }
-    }
-}
+//turn req into object
 public class DocumentDemo {
     public static void main(String[] args) {
-        Document doc=new Document();
+        Document doc=new Document(); //Reciever
 
-        Commands docOpen=new DocumentOpen(doc);
+        Commands docOpen=new DocumentOpen(doc); //Concrete commads
         Commands docWrite=new DocumentWrite(doc);
         Commands docClose=new DocumentClose(doc);
 
-        MenuOption menu=new MenuOption();
+        MenuOption menu=new MenuOption(); //Invoker
         menu.addCommands(docOpen);
         menu.addCommands(docWrite);
         menu.addCommands(docClose);

@@ -1,17 +1,17 @@
-package DesignPattern.ChainOfResponsibilityPattern;
+package DesignPattern.BehavioralDesignPattern.ChainOfResponsibilityPattern;
 
-abstract class OrderHandler{ //handler
-    protected  OrderHandler nextHandler;
+abstract class OrderHandler2{ //handler
+    protected  OrderHandler2 nextHandler;
     
-    public OrderHandler(OrderHandler nextHandler){
+    public OrderHandler2(OrderHandler2 nextHandler){
         this.nextHandler=nextHandler;
     }
 
     public abstract void processOrder(String order);
 }
 
-class OrderValidationHandler extends OrderHandler{ //concrete handler
-    public OrderValidationHandler(OrderHandler nextHandler) {
+class OrderValidationHandler extends OrderHandler2{ //concrete handler
+    public OrderValidationHandler(OrderHandler2 nextHandler) {
         super(nextHandler);
     }
 
@@ -27,8 +27,8 @@ class OrderValidationHandler extends OrderHandler{ //concrete handler
     }
 }
 
-class PaymentProcessHandler extends OrderHandler{ //concrete handler
-    public PaymentProcessHandler(OrderHandler nextHandler) {
+class PaymentProcessHandler extends OrderHandler2{ //concrete handler
+    public PaymentProcessHandler(OrderHandler2 nextHandler) {
         super(nextHandler);
     }
 
@@ -44,8 +44,8 @@ class PaymentProcessHandler extends OrderHandler{ //concrete handler
     }
 }
 
-class PrepareOrderHandler extends OrderHandler{ //concrete handler
-    public PrepareOrderHandler(OrderHandler nextHandler) {
+class PrepareOrderHandler2 extends OrderHandler2{ //concrete handler
+    public PrepareOrderHandler2(OrderHandler2 nextHandler) {
         super(nextHandler);
     }
 
@@ -61,8 +61,8 @@ class PrepareOrderHandler extends OrderHandler{ //concrete handler
     }
 }
 
-class DeliveryProcessHandler extends OrderHandler{ //concrete handler
-    public DeliveryProcessHandler(OrderHandler nextHandler) {
+class DeliveryProcessHandler extends OrderHandler2{ //concrete handler
+    public DeliveryProcessHandler(OrderHandler2 nextHandler) {
         super(nextHandler);
     }
 
@@ -78,8 +78,8 @@ class DeliveryProcessHandler extends OrderHandler{ //concrete handler
     }
 }
 
-class OrderTrackerHandler extends OrderHandler{ //concrete handler
-    public OrderTrackerHandler(OrderHandler nextHandler) {
+class OrderTrackerHandler extends OrderHandler2{ //concrete handler
+    public OrderTrackerHandler(OrderHandler2 nextHandler) {
         super(nextHandler);
     }
 
@@ -91,9 +91,9 @@ class OrderTrackerHandler extends OrderHandler{ //concrete handler
 
 public class SwiggyDemo {
     public static void main(String[] args) {
-        OrderHandler orderProcessingChain=new OrderValidationHandler(
+        OrderHandler2 orderProcessingChain=new OrderValidationHandler(
             new PaymentProcessHandler(
-                new PrepareOrderHandler(
+                new PrepareOrderHandler2(
                     new DeliveryProcessHandler(
                         new OrderTrackerHandler(null)))));
         

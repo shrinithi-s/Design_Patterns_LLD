@@ -1,6 +1,10 @@
-package DesignPattern.IteratorPattern;
+package DesignPattern.BehavioralDesignPattern.IteratorPattern;
 import java.util.*;
 
+//The Iterator Pattern separates how a collection is traversed from how the collection is stored.
+// Your Inventory exposes an iterator interface rather than exposing its traversal logic to the client.
+
+//client->creates products->put in inventory->creates a iterator
 class Product{
     private String name;
     private int price;
@@ -19,12 +23,12 @@ class Product{
     }
 }
 
-interface Iterator{
+interface ProductIteratorInterface{
     Product next();
     boolean hasNext();
 }
 
-class ProductIterator implements Iterator{
+class ProductIterator implements ProductIteratorInterface{
 
     private List<Product> products;
     private int current;
@@ -48,13 +52,13 @@ class ProductIterator implements Iterator{
 }
 
 class Inventory{
-    List<Product> products=new ArrayList<>();
+    List<Product> products=new ArrayList<>();  //product can exist without inventory - aggregation
 
     public void addProduct(Product product){
         products.add(product);
     }
 
-    public Iterator createIterator(){
+    public ProductIteratorInterface createIterator(){
         return new ProductIterator(products);
     }
 }
@@ -70,7 +74,7 @@ public class AmazonInventory {
         inventory.addProduct(product2);
         inventory.addProduct(product3);
 
-        Iterator iterator=inventory.createIterator();
+        ProductIteratorInterface iterator=inventory.createIterator();
 
         
         while(iterator.hasNext()){

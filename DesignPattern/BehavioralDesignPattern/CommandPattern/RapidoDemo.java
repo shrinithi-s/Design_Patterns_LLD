@@ -1,4 +1,14 @@
-package DesignPattern.CommandPattern;
+package DesignPattern.BehavioralDesignPattern.CommandPattern;
+
+class RapidoService{ //Reciever
+    public void book(String name,String src,String des){
+        System.out.println("Booking ride for "+name+" from "+src+" to "+des);
+    }
+
+    public void cancel(String name){
+        System.out.println("Ride cancelled for "+name);
+    }
+}
 
 interface Command{ //commands
     void execute();
@@ -18,6 +28,7 @@ class RapidoBook implements Command{ //concrete commands
         this.des=des;
     }
 
+    @Override
     public void execute(){
         rapidoService.book(name, src, des);
     }
@@ -34,18 +45,9 @@ class RapidoCancel implements Command{ //concrete commands
         this.name=name;
     }
 
+    @Override
     public void execute(){
         rapidoService.cancel(name);
-    }
-}
-
-class RapidoService{ //Reciever
-    public void book(String name,String src,String des){
-        System.out.println("Booking ride for "+name+" from "+src+" to "+des);
-    }
-
-    public void cancel(String name){
-        System.out.println("Ride cancelled for "+name);
     }
 }
 
